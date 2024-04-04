@@ -1,18 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+/// <summary>
+/// Moves the player
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
+    #region
+    [SerializeField]
+    private float speed = 1f;
+
+    [SerializeField]
+    private float fireRate = 1f;
+
+    [SerializeField]
+    private bool canShoot = true;
+
+    [SerializeField]
+    private int lives = 3;
+
+    [SerializeField]
+    private int score = 0;
+
+    private Rigidbody myRigidBody;
+    #endregion
+
+    #region Bound Region
+    [SerializeField]
+    private float minX;
+    [SerializeField]
+    private float minY;
+    [SerializeField]
+    private float maxX;
+    [SerializeField]
+    private float maxY;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        myRigidBody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Movement(InputAction.CallbackContext context)
+    {
+        
+        Vector2 myVector = context.ReadValue<Vector2>();
+        myRigidBody.AddForce(new Vector3(myVector.x, 0, myVector.y) * 2f, ForceMode.Impulse);
+        
+
+    }
+
+
+
+
+    private void Respawn()
+    {
+        if (lives > 0)
+        {
+            lives--;
+        }
+        else
+        {
+            //Go to game over screen
+        }
     }
 }
