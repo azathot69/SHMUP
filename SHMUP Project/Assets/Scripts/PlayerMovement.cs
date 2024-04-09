@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private int score = 0;
 
+    InputAction moveAction;
+    PlayerInput playerInput;
+
     private Rigidbody myRigidBody;
     #endregion
 
@@ -42,19 +45,22 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         myRigidBody = this.GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions.FindAction("Move");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Movement();
     }
 
-    public void Movement(InputAction.CallbackContext context)
+    public void Movement()
     {
         
-        Vector2 myVector = context.ReadValue<Vector2>();
-        myRigidBody.AddForce(new Vector3(myVector.x, 0, myVector.y) * 2f, ForceMode.Impulse);
+        Vector2 myVector = moveAction.ReadValue<Vector2>();
+        //myRigidBody.AddForce(new Vector3(myVector.x, 0, myVector.y) * 2f, ForceMode.Impulse);
+        transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
         
 
     }
