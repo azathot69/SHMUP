@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody myRigidBody;
     #endregion
 
+    private int powerUp = 0;
+
+
     #region Bound Region
     [SerializeField]
     private float minX;
@@ -108,5 +111,22 @@ public class PlayerMovement : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+    }
+
+    private IEnumerator PowerUpTimer(float puTimer)
+    {
+        yield return new WaitForSeconds(puTimer);
+        if (powerUp != 0)
+        {
+            switch (powerUp)
+            {
+                case 1:
+                        powerUp = 0; break;
+
+                case 2: powerUp = 0; break;
+
+                case 3: powerUp = 0; break;
+            }
+        }
     }
 }
