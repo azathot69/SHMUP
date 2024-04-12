@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum EnemyType
+{
+    test1,
+    test2,
+    test3,
+    test4,
+    test5
+}
+
 /// <summary>
 /// Spawns various enemies
 /// </summary>

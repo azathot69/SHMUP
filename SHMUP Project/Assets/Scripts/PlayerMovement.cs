@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+enum PowerUp
+{
+    Blaster,
+    Spread,
+    Shield
+}
+
 /// <summary>
 /// Moves the player
 /// </summary>
@@ -18,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private bool canShoot = true;
 
+    public GameObject playerBulletPrefeb;
+
     [SerializeField]
     private int lives = 3;
 
@@ -26,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
     InputAction moveAction;
     PlayerInput playerInput;
+
+    [SerializeField]
+    private Transform shootPoint;
 
     private Rigidbody myRigidBody;
     #endregion
@@ -59,13 +71,23 @@ public class PlayerMovement : MonoBehaviour
     {
         
         Vector2 myVector = moveAction.ReadValue<Vector2>();
-        //myRigidBody.AddForce(new Vector3(myVector.x, 0, myVector.y) * 2f, ForceMode.Impulse);
+
         transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
         
-
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ShootBullet();
+        }
     }
 
-
+    private void ShootBullet()
+    {
+        if (canShoot)
+        {
+            GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
+            StartCoroutine(Shooting(fireRate));
+        }
+    }
 
 
     private void Respawn()
@@ -78,5 +100,13 @@ public class PlayerMovement : MonoBehaviour
         {
             //Go to game over screen
         }
+    }
+
+    //IEnumerators
+    private IEnumerator Shooting(float fireRate)
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(fireRate);
+        canShoot = true;
     }
 }
