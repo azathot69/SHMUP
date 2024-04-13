@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 8880426507529574282, guid: 094ea78f9cefc364abea36355a486d12,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71737db431531054a9a3bf807c233877, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -170,6 +175,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerBullet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8880426507529574282, guid: 094ea78f9cefc364abea36355a486d12,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71737db431531054a9a3bf807c233877, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
