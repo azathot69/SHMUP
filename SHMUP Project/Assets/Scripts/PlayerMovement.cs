@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,8 @@ enum PowerUp
 /// </summary>
 public class PlayerMovement : MonoBehaviour
 {
+
+
     #region
     [SerializeField]
     private float speed = 1f;
@@ -38,9 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private bool shield = false;
-
-    [SerializeField]
-    private int score = 0;
 
     InputAction moveAction;
     PlayerInput playerInput;

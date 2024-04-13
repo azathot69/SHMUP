@@ -26,6 +26,8 @@ public class EnemyParent : MonoBehaviour
     private float startingY;
     [SerializeField]
     private float health = 1;
+    [SerializeField]
+    private int points = 0;
     #endregion
 
     #region Kill Region
@@ -62,7 +64,7 @@ public class EnemyParent : MonoBehaviour
                 }
                 else
                 {
-                    //Add to score
+                    Score.instance.score += points;
                     Destroy(this.gameObject);
                 }
 
