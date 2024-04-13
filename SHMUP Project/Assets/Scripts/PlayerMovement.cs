@@ -75,7 +75,11 @@ public class PlayerMovement : MonoBehaviour
         
         Vector2 myVector = moveAction.ReadValue<Vector2>();
 
-        transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
+        if (transform.position.x >= -8) {
+            transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
+        }
+
+        
         
         if (Input.GetKey(KeyCode.Space))
         {
