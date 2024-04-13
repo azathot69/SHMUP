@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 enum PowerUp
 {
+    None,
     Blaster,
-    Spread,
-    Shield
+    Spread
 }
 
 /// <summary>
@@ -26,9 +26,14 @@ public class PlayerMovement : MonoBehaviour
     private bool canShoot = true;
 
     public GameObject playerBulletPrefeb;
+    public GameObject playerBulletSpreadPrefab;
+    public GameObject playerBulletBlastPrefab;
 
     [SerializeField]
     private int lives = 3;
+
+    [SerializeField]
+    private bool shield = false;
 
     [SerializeField]
     private int score = 0;
@@ -42,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody myRigidBody;
     #endregion
 
-    private int powerUp = 0;
+    private int powerUp = 2;
 
 
     #region Bound Region
@@ -67,7 +72,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Movement();
+        
     }
 
     public void Movement()
@@ -75,12 +82,8 @@ public class PlayerMovement : MonoBehaviour
         
         Vector2 myVector = moveAction.ReadValue<Vector2>();
 
-        if (transform.position.x >= -8) {
-            transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
-        }
+        transform.position += new Vector3(myVector.x, 0, myVector.y) * speed * Time.deltaTime;
 
-        
-        
         if (Input.GetKey(KeyCode.Space))
         {
             ShootBullet();
@@ -89,23 +92,50 @@ public class PlayerMovement : MonoBehaviour
 
     private void ShootBullet()
     {
-        if (canShoot)
+
+
+        switch (powerUp)
         {
-            GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
-            StartCoroutine(Shooting(fireRate));
+            case 0: //Normal Shot
+                if (canShoot)
+                {
+                    GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
+                    StartCoroutine(Shooting(fireRate));
+                } break;
+
+            case 1: //Blaster
+                if (canShoot)
+                {
+                    GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
+                    StartCoroutine(Shooting(fireRate));
+                } break;
+
+            case 2: //Spread
+                if (canShoot)
+                {
+                    GameObject playerBulletInstance = Instantiate(playerBulletSpreadPrefab, shootPoint.position, shootPoint.rotation);
+                    StartCoroutine(Shooting(fireRate));
+                } break;
         }
     }
 
 
     private void Respawn()
     {
-        if (lives > 0)
+        if (!shield)
         {
-            lives--;
+            if (lives > 0)
+            {
+                lives--;
+            }
+            else
+            {
+                //Go to game over screen
+            }
         }
         else
         {
-            //Go to game over screen
+            shield = false;
         }
     }
 
@@ -128,8 +158,6 @@ public class PlayerMovement : MonoBehaviour
                         powerUp = 0; break;
 
                 case 2: powerUp = 0; break;
-
-                case 3: powerUp = 0; break;
             }
         }
     }

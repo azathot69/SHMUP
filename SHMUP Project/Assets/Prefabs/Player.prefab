@@ -126,7 +126,11 @@ MonoBehaviour:
   canShoot: 1
   playerBulletPrefeb: {fileID: 2572542472772461492, guid: 094ea78f9cefc364abea36355a486d12,
     type: 3}
+  playerBulletSpreadPrefab: {fileID: 2293743492541749411, guid: 76904e7a541e32d469ba4a63680e9449,
+    type: 3}
+  playerBulletBlastPrefab: {fileID: 0}
   lives: 3
+  shield: 0
   score: 0
   shootPoint: {fileID: 0}
   minX: 0
