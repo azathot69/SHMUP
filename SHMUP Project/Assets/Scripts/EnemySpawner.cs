@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// NEED TO DOS:
+/// GET RANDOM X COORDINATE
+/// SPAWN ENEMY AT RANDOM LOCATION
+/// </summary>
+
 enum EnemyType
 {
     test1,

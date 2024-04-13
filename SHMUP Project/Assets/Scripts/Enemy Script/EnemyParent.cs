@@ -1,16 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-enum Movement
-{
-    moveRight,
-    moveLeft,
-    moveUp,
-    moveDown,
-    moveZig,
-    moveZag
-}
 
 /// <summary>
 /// Initializes a script to be used by all enemies
@@ -37,7 +29,7 @@ public class EnemyParent : MonoBehaviour
     #endregion
 
     #region Kill Region
-
+    private float killY = -8;
     #endregion
 
     // Start is called before the first frame update
@@ -51,6 +43,43 @@ public class EnemyParent : MonoBehaviour
     void Update()
     {
         
+
+        //Despawn when reaching zone
+        if (transform.position.z <= killY)
+        {
+            Despawn();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.name)
+        {
+            case "Bullet":
+                if (health > 0)
+                {
+                    health--;
+                }
+                else
+                {
+                    //Add to score
+                    Destroy(this.gameObject);
+                }
+
+                break;
+
+            case "Player":
+                if (health > 0)
+                {
+                    health--;
+                }
+                else
+                {
+                    //Add to score
+                    Destroy(this.gameObject);
+                }
+                break;
+        }
     }
 
     private void Despawn()

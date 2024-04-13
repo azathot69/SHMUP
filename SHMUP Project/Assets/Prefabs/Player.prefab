@@ -128,7 +128,8 @@ MonoBehaviour:
     type: 3}
   playerBulletSpreadPrefab: {fileID: 2293743492541749411, guid: 76904e7a541e32d469ba4a63680e9449,
     type: 3}
-  playerBulletBlastPrefab: {fileID: 0}
+  playerBulletBlastPrefab: {fileID: 1480064455652990887, guid: 337c99a94bf93b449b5bd128aab51421,
+    type: 3}
   lives: 3
   shield: 0
   score: 0

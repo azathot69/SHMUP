@@ -10,6 +10,10 @@ enum PowerUp
     Spread
 }
 
+///NEED TO DOS:
+/// BIND PLAYER MOVEMENT WITHIN SCREEN
+
+
 /// <summary>
 /// Moves the player
 /// </summary>
@@ -46,8 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody myRigidBody;
     #endregion
+    [SerializeField]
+    private PowerUp currPower = PowerUp.None;
 
-    private int powerUp = 2;
+    //private int powerUp = 2;
 
 
     #region Bound Region
@@ -92,31 +98,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void ShootBullet()
     {
-
-
-        switch (powerUp)
+        switch (currPower)
         {
-            case 0: //Normal Shot
+            case PowerUp.None:
                 if (canShoot)
                 {
                     GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
                     StartCoroutine(Shooting(fireRate));
-                } break;
+                }
+                break;
 
-            case 1: //Blaster
+            case PowerUp.Blaster:
                 if (canShoot)
                 {
                     GameObject playerBulletInstance = Instantiate(playerBulletPrefeb, shootPoint.position, shootPoint.rotation);
                     StartCoroutine(Shooting(fireRate));
-                } break;
+                }
+                break;
 
-            case 2: //Spread
-                if (canShoot)
+            case PowerUp.Spread:
                 {
                     GameObject playerBulletInstance = Instantiate(playerBulletSpreadPrefab, shootPoint.position, shootPoint.rotation);
                     StartCoroutine(Shooting(fireRate));
-                } break;
+                }
+                break;
         }
+        
     }
 
 
@@ -150,15 +157,10 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PowerUpTimer(float puTimer)
     {
         yield return new WaitForSeconds(puTimer);
-        if (powerUp != 0)
-        {
-            switch (powerUp)
-            {
-                case 1:
-                        powerUp = 0; break;
 
-                case 2: powerUp = 0; break;
-            }
+        if (currPower != PowerUp.None)
+        {
+            currPower = PowerUp.None;
         }
     }
 }
