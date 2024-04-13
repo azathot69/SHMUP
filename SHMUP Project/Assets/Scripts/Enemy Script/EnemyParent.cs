@@ -28,6 +28,8 @@ public class EnemyParent : MonoBehaviour
     private float health = 1;
     [SerializeField]
     private int points = 0;
+
+    private int dropChance = Random.Range(1, 6);
     #endregion
 
     #region Kill Region
@@ -87,5 +89,24 @@ public class EnemyParent : MonoBehaviour
     private void Despawn()
     {
         gameObject.SetActive(false);
+
+        switch(dropChance)
+        {
+            case 1:
+                Debug.Log("Dropped Blaster PowerUp!");
+                break;
+
+            case 2:
+                Debug.Log("Dropped Blaster PowerUp!");
+                break;
+
+            case 3:
+                Debug.Log("Dropped Blaster PowerUp!");
+                break;
+
+            default:
+                Debug.Log("Better Luck NExt Time!");
+                break;
+        }
     }
 }
